@@ -1,0 +1,11 @@
+pipeline {
+  agent any
+  stages {
+    stage('Failover to Secondary Region') {
+      steps {
+        sh 'cd terraform && terraform init -backend=false'
+        sh 'cd terraform && terraform apply -auto-approve -target=aws_instance.app -var-file=failover.tf'
+      }
+    }
+  }
+}

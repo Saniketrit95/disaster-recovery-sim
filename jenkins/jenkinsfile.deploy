@@ -1,0 +1,11 @@
+pipeline {
+  agent any
+  stages {
+    stage('Deploy to Primary Region') {
+      steps {
+        sh 'cd terraform && terraform init'
+        sh 'cd terraform && terraform apply -auto-approve -target=aws_instance.app'
+      }
+    }
+  }
+}
